@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎁 Surprise for My Bhai 🎁</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* 🔒 Password overlay */
+    #pw-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: linear-gradient(to right, #141e30, #243b55);
+      z-index: 9999;
+    }
+    #pw-overlay h2 {
+      margin-bottom: 12px;
+      font-size: 1.8rem;
+      color: #fff;
+    }
+    #pw-overlay input {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      width: 220px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    #pw-overlay button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #667eea;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #site-content { display: none; }
+
+    /* 🎉 Main site styling */
+    h1 {
+      font-size: 2.8rem;
+      margin-top: 30px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+      animation: bounce 2s infinite;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 6px 0;
+    }
+
+    .message {
+      margin: 20px auto;
+      max-width: 650px;
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    img {
+      width: 220px;
+      height: auto;
+      border-radius: 15px;
+      margin: 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+      transition: transform 0.3s;
+    }
+    img:hover { transform: scale(1.07); }
+
+    /* ❤️ Floating hearts */
+    .hearts {
+      position: fixed;
+      top: -10px;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 1.8rem;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    footer {
+      margin: 30px 0;
+      font-size: 0.9rem;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔒 Password screen -->
+  <div id="pw-overlay">
+    <h2>Enter Secret Password 🔑</h2>
+    <input id="pw-input" type="password" placeholder="Password">
+    <button onclick="checkPW()">Open Surprise</button>
+  </div>
+
+  <!-- 🎉 Real site -->
+  <div id="site-content">
+    <h1>🎉 Surprise Bhai! 🎉</h1>
+    <p>Ye website sirf tere liye banayi hai ❤️</p>
+
+    <div class="message">
+      <p>🌟🦸‍♂️brothers are like stars; you may not always see them, but you know they're always there." "having a brother is like having a built-in best friend for life." "my brother, you may not always be by my side, but you are always in my heart." "to the world, you may be one person, but to me, you are the world.🌟 😊</p>
+    </div>
+
+    <!-- 👇 Yaha photo dalna (link ya file) -->
+    <img src="images/bhai1.jpg" alt="Bhai Photo 1">
+    <img src="images/bhai2.jpg" alt="Bhai Photo 2">
+    <img src="images/bhai3.jpg" alt="Bhai photo 3">
+
+    <div class="hearts"></div>
+
+    <footer>Made with ❤️ just for you</footer>
+  </div>
+
+  <script>
+    // ❤️ Floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+      document.querySelector(".hearts").appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 600);
+
+    // 🔑 Password check
+    const SITE_PASSWORD = "surprise123"; // <-- yaha apna password change karo
+    function checkPW(){
+      const v = document.getElementById('pw-input').value;
+      if(v === SITE_PASSWORD){
+        document.getElementById('pw-overlay').style.display='none';
+        document.getElementById('site-content').style.display='block';
+      } else {
+        alert('❌ Wrong password, try again!');
+      }
+    }
+    document.getElementById('pw-input').addEventListener('keypress',e=>{
+      if(e.key==='Enter') checkPW();
+    });
+  </script>
+</body>
+</html>
